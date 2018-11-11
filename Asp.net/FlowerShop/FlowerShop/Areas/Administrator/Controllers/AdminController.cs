@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace FlowerShop.Areas.Administrator.Controllers
 {
-    public class HomeController : Controller
+    public class AdminController : Controller
     {
-        // GET: Administrator/Home
+        // GET: Administrator/Admin
         public ActionResult Index()
         {
             return View();

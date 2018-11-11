@@ -148,7 +148,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
-    <Compile Include="Areas\Administrator\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\AdminController.cs" />
     <Compile Include="Areas\Administrator\Controllers\LoginController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ProductController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -156,6 +156,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Administrator\Content\css\style.css" />
@@ -1965,6 +1970,76 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\flexslider.css" />
+    <Content Include="Content\css\menu.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\1.jpg" />
+    <Content Include="Content\images\2.jpg" />
+    <Content Include="Content\images\3.jpg" />
+    <Content Include="Content\images\4.jpg" />
+    <Content Include="Content\images\about-img.jpg" />
+    <Content Include="Content\images\arrows.png" />
+    <Content Include="Content\images\arrow_up.png" />
+    <Content Include="Content\images\au.png" />
+    <Content Include="Content\images\bm.png" />
+    <Content Include="Content\images\body_bg3.jpg" />
+    <Content Include="Content\images\button-bg.png" />
+    <Content Include="Content\images\cart.jpg" />
+    <Content Include="Content\images\ck.png" />
+    <Content Include="Content\images\contact.png" />
+    <Content Include="Content\images\cu.png" />
+    <Content Include="Content\images\discount-img.png" />
+    <Content Include="Content\images\down-arrow.png" />
+    <Content Include="Content\images\drop_arrow-hover.png" />
+    <Content Include="Content\images\drop_arrow.png" />
+    <Content Include="Content\images\facebook.png" />
+    <Content Include="Content\images\feature-pic1.png" />
+    <Content Include="Content\images\feature-pic2.jpg" />
+    <Content Include="Content\images\feature-pic3.jpg" />
+    <Content Include="Content\images\feature-pic4.png" />
+    <Content Include="Content\images\footer-bg.gif" />
+    <Content Include="Content\images\gb.png" />
+    <Content Include="Content\images\gradient_light-1.png" />
+    <Content Include="Content\images\header_arrow.png" />
+    <Content Include="Content\images\header_cart.png" />
+    <Content Include="Content\images\icon-1.png" />
+    <Content Include="Content\images\icon-2.png" />
+    <Content Include="Content\images\icon-3.png" />
+    <Content Include="Content\images\icon-4.png" />
+    <Content Include="Content\images\large-button-overlay.png" />
+    <Content Include="Content\images\linkedin.png" />
+    <Content Include="Content\images\login.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\new-pic1.jpg" />
+    <Content Include="Content\images\new-pic2.jpg" />
+    <Content Include="Content\images\new-pic3.jpg" />
+    <Content Include="Content\images\pic1.png" />
+    <Content Include="Content\images\pic2.jpg" />
+    <Content Include="Content\images\pic3.jpg" />
+    <Content Include="Content\images\pic3.png" />
+    <Content Include="Content\images\pic4.png" />
+    <Content Include="Content\images\preview-img.jpg" />
+    <Content Include="Content\images\preview-img3.jpg" />
+    <Content Include="Content\images\preview-img4.jpg" />
+    <Content Include="Content\images\preview-img5.jpg" />
+    <Content Include="Content\images\preview-img6.jpg" />
+    <Content Include="Content\images\rating.png" />
+    <Content Include="Content\images\tag.png" />
+    <Content Include="Content\images\team1.jpg" />
+    <Content Include="Content\images\team2.jpg" />
+    <Content Include="Content\images\team3.jpg" />
+    <Content Include="Content\images\team4.jpg" />
+    <Content Include="Content\images\twitter.png" />
+    <Content Include="Content\images\youtube.png" />
+    <Content Include="Content\js\easing.js" />
+    <Content Include="Content\js\jquery-1.7.2.min.js" />
+    <Content Include="Content\js\jquery.easing.js" />
+    <Content Include="Content\js\jquery.flexslider.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\menu-2.js" />
+    <Content Include="Content\js\menu.js" />
+    <Content Include="Content\js\move-top.js" />
+    <Content Include="Content\js\script.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2142,9 +2217,13 @@
     <Content Include="Areas\Administrator\Content\scss\_variables.scss" />
     <Content Include="Areas\Administrator\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administrator\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Administrator\Views\Home\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\Product\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Admin\Index.cshtml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2167,8 +2246,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
