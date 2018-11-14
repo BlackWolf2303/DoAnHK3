@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace FlowerShop.Areas.Administrator.Controllers
+namespace FlowerShop.Controllers
 {
-    public class LoginController : Controller
+    public class AboutController : Controller
     {
-        // GET: Administrator/Login
+        // GET: About
         public ActionResult Index()
         {
             return View();
