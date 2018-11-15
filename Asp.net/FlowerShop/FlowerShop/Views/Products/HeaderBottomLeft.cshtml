@@ -1,0 +1,50 @@
+﻿@using FlowerShop.Models.Views
+@model IList<FlowerShop.Models.Views.ProductViewModel>
+
+<div class="header_bottom_left">
+    <div class="section group">
+        <div class="listview_1_of_2 images_1_of_2">
+            <div class="listimg listimg_2_of_1">
+                <a href="Products/Detail/@Model[0].Id"> <img src="~/Content/images/@Model[0].Images.FirstOrDefault().Path" alt="" /></a>
+            </div>
+            <div class="text list_2_of_1">
+                <h2>@Model[0].Name</h2>
+                <p>@Model[0].Description</p>
+                <div class="button"><span><a href="preview.html">Add to cart</a></span></div>
+            </div>
+        </div>
+        <div class="listview_1_of_2 images_1_of_2">
+            <div class="listimg listimg_2_of_1">
+                <a href="Products/Detail/@Model[1].Id"> <img src="~/Content/images/@Model[0].Images.FirstOrDefault().Path" alt="" /></a>
+            </div>
+            <div class="text list_2_of_1">
+                <h2>@Model[1].Name</h2>
+                <p>@Model[1].Description</p>
+                <div class="button"><span><a href="preview.html">Add to cart</a></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="section group">
+        <div class="listview_1_of_2 images_1_of_2">
+            <div class="listimg listimg_2_of_1">
+                <a href="Products/Detail/@Model[2].Id"> <img src="~/Content/images/@Model[0].Images.FirstOrDefault().Path" alt="" /></a>
+            </div>
+            <div class="text list_2_of_1">
+                <h2>@Model[2].Name</h2>
+                <p>@Model[2].Description</p>
+                <div class="button"><span><a href="preview.html">Add to cart</a></span></div>
+            </div>
+        </div>
+        <div class="listview_1_of_2 images_1_of_2">
+            <div class="listimg listimg_2_of_1">
+                <a href="Products/Detail/@Model[3].Id"> <img src="~/Content/images/@Model[0].Images.FirstOrDefault().Path" alt="" /></a>
+            </div>
+            <div class="text list_2_of_1">
+                <h2>@Model[3].Name</h2>
+                <p>@Model[3].Description</p>
+                <div class="button"><span><a href="preview.html">Add to cart</a></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

@@ -1,0 +1,96 @@
+﻿@model IList<FlowerShop.Models.Views.ProductViewModel>
+<div class="section group">
+    <!-- #region Template Trash -->
+    @*<div class="grid_1_of_4 images_1_of_4">
+            <a href="preview-3.html"><img src="~/Content/images/new-pic1.jpg" alt="" /></a>
+            <div class="discount">
+                <span class="percentage">40%</span>
+            </div>
+            <h2>Lorem Ipsum is simply </h2>
+            <p><span class="strike">$438.99</span><span class="price">$403.66</span></p>
+            <div class="button">
+                <span>
+                    <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
+                        Add
+                        to
+                        Cart
+                    </a>
+                </span>
+            </div>
+            <div class="button"><span><a href="preview-3.html" class="details">Details</a></span></div>
+        </div>
+        <div class="grid_1_of_4 images_1_of_4">
+            <a href="preview-4.html"><img src="~/Content/images/new-pic2.jpg" alt="" /></a>
+            <div class="discount">
+                <span class="percentage">22%</span>
+            </div>
+            <h2>Lorem Ipsum is simply </h2>
+            <p><span class="strike">$667.22</span><span class="price">$621.75</span></p>
+            <div class="button">
+                <span>
+                    <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-4.html" class="cart-button">
+                        Add
+                        to
+                        Cart
+                    </a>
+                </span>
+            </div>
+            <div class="button"><span><a href="preview-4.html" class="details">Details</a></span></div>
+        </div>
+        <div class="grid_1_of_4 images_1_of_4">
+            <a href="preview-2.html"><img src="~/Content/images/feature-pic2.jpg" alt="" /></a>
+            <div class="discount">
+                <span class="percentage">55%</span>
+            </div>
+            <h2>Lorem Ipsum is simply </h2>
+            <p><span class="strike">$457.22</span><span class="price">$428.02</span></p>
+            <div class="button">
+                <span>
+                    <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-2.html" class="cart-button">
+                        Add
+                        to
+                        Cart
+                    </a>
+                </span>
+            </div>
+            <div class="button"><span><a href="preview-2.html" class="details">Details</a></span></div>
+        </div>
+        <div class="grid_1_of_4 images_1_of_4">
+            <a href="preview-2.html"> <img src="~/Content/images/new-pic3.jpg" alt="" /></a>
+            <div class="discount">
+                <span class="percentage">66%</span>
+            </div>
+            <h2>Lorem Ipsum is simply </h2>
+            <p><span class="strike">$643.22</span><span class="price">$457.88</span></p>
+            <div class="button">
+                <span>
+                    <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-2.html" class="cart-button">
+                        Add
+                        to
+                        Cart
+                    </a>
+                </span>
+            </div>
+            <div class="button"><span><a href="#" class="details">Details</a></span></div>
+        </div>*@
+    <!-- #endregion -->
+    @foreach (var product in Model)
+    {
+        <div class="grid_1_of_4 images_1_of_4">
+            <a href="preview-2.html"><img src="~/Content/images/@product.Images.FirstOrDefault().Path" alt="" /></a>
+            <h2>@product.Name</h2>
+            <p>@product.Description</p>
+            <p><span class="strike">@product.Price</span><span class="price">@product.Price</span></p>
+            <div class="button">
+                <span>
+                    <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
+                        Add
+                        to
+                        Cart
+                    </a>
+                </span>
+            </div>
+            <div class="button"><span><a href="#" class="details">Details</a></span></div>
+        </div>
+    }
+</div>

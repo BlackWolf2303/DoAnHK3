@@ -17,7 +17,5 @@ namespace FlowerShop.Controllers
             var product = AutoMapper.Mapper.Map<List<ProductViewModel>>(homeServices.GetAll());
             return View(product);
         }
-
-
     }
 }

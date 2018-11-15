@@ -17,7 +17,7 @@ namespace FlowerShop.Models.Views
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public ICollection<OrderDetail> OrderDetails { get; set; }
-        public ICollection<Image> Images { get; set; }
+        public ICollection<OrderDetailViewModel> OrderDetails { get; set; }
+        public ICollection<ImageViewModel> Images { get; set; }
     }
 }
