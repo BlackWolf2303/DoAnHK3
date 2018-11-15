@@ -1,0 +1,16 @@
+﻿using System;
+
+namespace FlowerShop.Models
+{
+    public class Image
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
+
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
+    }
+}

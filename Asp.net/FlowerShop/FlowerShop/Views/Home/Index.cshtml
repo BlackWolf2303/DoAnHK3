@@ -1,9 +1,13 @@
-﻿
+﻿@using FlowerShop.Models.Views
+
+@model IList<FlowerShop.Models.Views.ProductViewModel>
+
 @{
     ViewBag.Title = "Home";
 }
 
 <div>
+    <!-- #region Slider -->
     <div class="header_bottom">
         <div class="header_bottom_left">
             <div class="section group">
@@ -68,9 +72,11 @@
         </div>
         <div class="clear"></div>
     </div>
+    <!-- #endregion -->
 
     <div class="main">
         <div class="content">
+            <!-- #region ContentTop -->
             <div class="content_top">
                 <div class="heading">
                     <h3>Feature Products</h3>
@@ -113,72 +119,81 @@
                 </div>
                 <div class="clear"></div>
             </div>
+            <!-- #endregion -->
+            <!-- #region BEST SELLER PRODUCT -->
             <div class="section group">
-                <div class="grid_1_of_4 images_1_of_4">
-                    <a href="preview-3.html"><img src="~/Content/images/feature-pic1.png" alt="" /></a>
-                    <h2>Lorem Ipsum is simply </h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                    <p><span class="strike">$528.22</span><span class="price">$505.22</span></p>
-                    <div class="button">
-                        <span>
-                            <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
-                                Add
-                                to
-                                Cart
-                            </a>
-                        </span>
+                <!-- #region Trash Template -->
+                @*<div class="grid_1_of_4 images_1_of_4">
+                        <a href="preview-3.html"><img src="~/Content/images/feature-pic1.png" alt="" /></a>
+                        <h2>Lorem Ipsum is simply </h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <p><span class="strike">$528.22</span><span class="price">$505.22</span></p>
+                        <div class="button">
+                            <span>
+                                <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
+                                    Add
+                                    to
+                                    Cart
+                                </a>
+                            </span>
+                        </div>
+                        <div class="button"><span><a href="preview-3.html" class="details">Details</a></span></div>
                     </div>
-                    <div class="button"><span><a href="preview-3.html" class="details">Details</a></span></div>
-                </div>
-                <div class="grid_1_of_4 images_1_of_4">
-                    <a href="preview-2.html"><img src="~/Content/images/feature-pic2.jpg" alt="" /></a>
-                    <h2>Lorem Ipsum is simply </h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                    <p><span class="strike">$640.89</span><span class="price">$620.87</span></p>
-                    <div class="button">
-                        <span>
-                            <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
-                                Add
-                                to
-                                Cart
-                            </a>
-                        </span>
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="preview-2.html"><img src="~/Content/images/feature-pic2.jpg" alt="" /></a>
+                        <h2>Lorem Ipsum is simply </h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <p><span class="strike">$640.89</span><span class="price">$620.87</span></p>
+                        <div class="button">
+                            <span>
+                                <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
+                                    Add
+                                    to
+                                    Cart
+                                </a>
+                            </span>
+                        </div>
+                        <div class="button"><span><a href="#" class="details">Details</a></span></div>
                     </div>
-                    <div class="button"><span><a href="#" class="details">Details</a></span></div>
-                </div>
-                <div class="grid_1_of_4 images_1_of_4">
-                    <a href="preview-4.html"><img src="~/Content/images/feature-pic3.jpg" alt="" /></a>
-                    <h2>Lorem Ipsum is simply </h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                    <p><span class="strike">$240.66</span><span class="price">$220.97</span></p>
-                    <div class="button">
-                        <span>
-                            <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-6.html" class="cart-button">
-                                Add
-                                to
-                                Cart
-                            </a>
-                        </span>
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="preview-4.html"><img src="~/Content/images/feature-pic3.jpg" alt="" /></a>
+                        <h2>Lorem Ipsum is simply </h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <p><span class="strike">$240.66</span><span class="price">$220.97</span></p>
+                        <div class="button">
+                            <span>
+                                <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-6.html" class="cart-button">
+                                    Add
+                                    to
+                                    Cart
+                                </a>
+                            </span>
+                        </div>
+                        <div class="button"><span><a href="#" class="details">Details</a></span></div>
+                    </div>*@
+                <!-- #endregion -->
+                @foreach (var product in Model)
+                {
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="preview-2.html"><img src="~/Content/images/@product.Images.FirstOrDefault().Path" alt="" /></a>
+                        <h2>@product.Name</h2>
+                        <p>@product.Description</p>
+                        <p><span class="strike">@product.Price</span><span class="price">@product.Price</span></p>
+                        <div class="button">
+                            <span>
+                                <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
+                                    Add
+                                    to
+                                    Cart
+                                </a>
+                            </span>
+                        </div>
+                        <div class="button"><span><a href="#" class="details">Details</a></span></div>
                     </div>
-                    <div class="button"><span><a href="#" class="details">Details</a></span></div>
-                </div>
-                <div class="grid_1_of_4 images_1_of_4">
-                    <a href="preview-2.html"><img src="~/Content/images/feature-pic4.png" alt="" /></a>
-                    <h2>Lorem Ipsum is simply </h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                    <p><span class="strike">$436.22</span><span class="price">$415.54</span></p>
-                    <div class="button">
-                        <span>
-                            <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
-                                Add
-                                to
-                                Cart
-                            </a>
-                        </span>
-                    </div>
-                    <div class="button"><span><a href="#" class="details">Details</a></span></div>
-                </div>
+                }
             </div>
+            <!-- #endregion -->
+            <!-- #region content_bottom -->
             <div class="content_bottom">
                 <div class="heading">
                     <h3>New Products</h3>
@@ -221,80 +236,104 @@
                 </div>
                 <div class="clear"></div>
             </div>
+            <!-- #endregion -->
+            <!-- #region section group -->
             <div class="section group">
-                <div class="grid_1_of_4 images_1_of_4">
-                    <a href="preview-3.html"><img src="~/Content/images/new-pic1.jpg" alt="" /></a>
-                    <div class="discount">
-                        <span class="percentage">40%</span>
+                <!-- #region Template Trash -->
+                @*<div class="grid_1_of_4 images_1_of_4">
+                        <a href="preview-3.html"><img src="~/Content/images/new-pic1.jpg" alt="" /></a>
+                        <div class="discount">
+                            <span class="percentage">40%</span>
+                        </div>
+                        <h2>Lorem Ipsum is simply </h2>
+                        <p><span class="strike">$438.99</span><span class="price">$403.66</span></p>
+                        <div class="button">
+                            <span>
+                                <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
+                                    Add
+                                    to
+                                    Cart
+                                </a>
+                            </span>
+                        </div>
+                        <div class="button"><span><a href="preview-3.html" class="details">Details</a></span></div>
                     </div>
-                    <h2>Lorem Ipsum is simply </h2>
-                    <p><span class="strike">$438.99</span><span class="price">$403.66</span></p>
-                    <div class="button">
-                        <span>
-                            <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
-                                Add
-                                to
-                                Cart
-                            </a>
-                        </span>
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="preview-4.html"><img src="~/Content/images/new-pic2.jpg" alt="" /></a>
+                        <div class="discount">
+                            <span class="percentage">22%</span>
+                        </div>
+                        <h2>Lorem Ipsum is simply </h2>
+                        <p><span class="strike">$667.22</span><span class="price">$621.75</span></p>
+                        <div class="button">
+                            <span>
+                                <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-4.html" class="cart-button">
+                                    Add
+                                    to
+                                    Cart
+                                </a>
+                            </span>
+                        </div>
+                        <div class="button"><span><a href="preview-4.html" class="details">Details</a></span></div>
                     </div>
-                    <div class="button"><span><a href="preview-3.html" class="details">Details</a></span></div>
-                </div>
-                <div class="grid_1_of_4 images_1_of_4">
-                    <a href="preview-4.html"><img src="~/Content/images/new-pic2.jpg" alt="" /></a>
-                    <div class="discount">
-                        <span class="percentage">22%</span>
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="preview-2.html"><img src="~/Content/images/feature-pic2.jpg" alt="" /></a>
+                        <div class="discount">
+                            <span class="percentage">55%</span>
+                        </div>
+                        <h2>Lorem Ipsum is simply </h2>
+                        <p><span class="strike">$457.22</span><span class="price">$428.02</span></p>
+                        <div class="button">
+                            <span>
+                                <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-2.html" class="cart-button">
+                                    Add
+                                    to
+                                    Cart
+                                </a>
+                            </span>
+                        </div>
+                        <div class="button"><span><a href="preview-2.html" class="details">Details</a></span></div>
                     </div>
-                    <h2>Lorem Ipsum is simply </h2>
-                    <p><span class="strike">$667.22</span><span class="price">$621.75</span></p>
-                    <div class="button">
-                        <span>
-                            <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-4.html" class="cart-button">
-                                Add
-                                to
-                                Cart
-                            </a>
-                        </span>
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="preview-2.html"> <img src="~/Content/images/new-pic3.jpg" alt="" /></a>
+                        <div class="discount">
+                            <span class="percentage">66%</span>
+                        </div>
+                        <h2>Lorem Ipsum is simply </h2>
+                        <p><span class="strike">$643.22</span><span class="price">$457.88</span></p>
+                        <div class="button">
+                            <span>
+                                <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-2.html" class="cart-button">
+                                    Add
+                                    to
+                                    Cart
+                                </a>
+                            </span>
+                        </div>
+                        <div class="button"><span><a href="#" class="details">Details</a></span></div>
+                    </div>*@
+                <!-- #endregion -->
+                @foreach (var product in Model)
+                {
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="preview-2.html"><img src="~/Content/images/@product.Images.FirstOrDefault().Path" alt="" /></a>
+                        <h2>@product.Name</h2>
+                        <p>@product.Description</p>
+                        <p><span class="strike">@product.Price</span><span class="price">@product.Price</span></p>
+                        <div class="button">
+                            <span>
+                                <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-3.html" class="cart-button">
+                                    Add
+                                    to
+                                    Cart
+                                </a>
+                            </span>
+                        </div>
+                        <div class="button"><span><a href="#" class="details">Details</a></span></div>
                     </div>
-                    <div class="button"><span><a href="preview-4.html" class="details">Details</a></span></div>
-                </div>
-                <div class="grid_1_of_4 images_1_of_4">
-                    <a href="preview-2.html"><img src="~/Content/images/feature-pic2.jpg" alt="" /></a>
-                    <div class="discount">
-                        <span class="percentage">55%</span>
-                    </div>
-                    <h2>Lorem Ipsum is simply </h2>
-                    <p><span class="strike">$457.22</span><span class="price">$428.02</span></p>
-                    <div class="button">
-                        <span>
-                            <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-2.html" class="cart-button">
-                                Add
-                                to
-                                Cart
-                            </a>
-                        </span>
-                    </div>
-                    <div class="button"><span><a href="preview-2.html" class="details">Details</a></span></div>
-                </div>
-                <div class="grid_1_of_4 images_1_of_4">
-                    <a href="preview-2.html"> <img src="~/Content/images/new-pic3.jpg" alt="" /></a>
-                    <div class="discount">
-                        <span class="percentage">66%</span>
-                    </div>
-                    <h2>Lorem Ipsum is simply </h2>
-                    <p><span class="strike">$643.22</span><span class="price">$457.88</span></p>
-                    <div class="button">
-                        <span>
-                            <img src="~/Content/images/cart.jpg" alt="" /><a href="preview-2.html" class="cart-button">
-                                Add
-                                to
-                                Cart
-                            </a>
-                        </span>
-                    </div>
-                    <div class="button"><span><a href="#" class="details">Details</a></span></div>
-                </div>
+                }
             </div>
+            <!-- #endregion -->
         </div>
     </div>
 </div>

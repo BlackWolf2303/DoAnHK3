@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlowerShop.DAL;
+using FlowerShop.Models.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,9 @@ namespace FlowerShop.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            HomeServices homeServices = new HomeServices();
+            var product = AutoMapper.Mapper.Map<List<ProductViewModel>>(homeServices.GetAll());
+            return View(product);
         }
     }
 }
