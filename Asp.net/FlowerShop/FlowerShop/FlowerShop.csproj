@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201811131510480_Initial.Designer.cs">
       <DependentUpon>201811131510480_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811151318511_ImportData.cs" />
+    <Compile Include="Migrations\201811151318511_ImportData.Designer.cs">
+      <DependentUpon>201811151318511_ImportData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cores\Entity.cs" />
     <Compile Include="Models\Cores\IEntity.cs" />
@@ -2314,6 +2318,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811131510480_Initial.resx">
       <DependentUpon>201811131510480_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811151318511_ImportData.resx">
+      <DependentUpon>201811151318511_ImportData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
