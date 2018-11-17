@@ -7,9 +7,14 @@ namespace Flower.Core.Interfaces
 {
     public interface IUnitOfWork
     {
-        IRepository<Product> ProductRepository { get; }
-
         IRepository<Category> CategoryRepository { get; }
+        IRepository<Discount> DiscountRepository { get; }
+        IRepository<Image> ImageRepository { get; }
+        IRepository<Order> OrderRepository { get; }
+        IRepository<OrderDetail> OrderDetailRepository { get; }
+        IRepository<Product> ProductRepository { get; }
+        IRepository<Role> RoleRepository { get; }
+        IRepository<User> UserRepository { get; }
 
         void Refresh();
 

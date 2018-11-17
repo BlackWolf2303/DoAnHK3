@@ -1,7 +1,5 @@
 ﻿using Flower.Core.Entities;
 using Flower.Core.Interfaces;
-using System;
-using System.Data.Entity;
 
 namespace Flower.Core.Implementations
 {
@@ -23,6 +21,30 @@ namespace Flower.Core.Implementations
             this.context = context;
         }
 
+        public IRepository<User> UserRepository
+        {
+            get
+            {
+                if (userRepository == null)
+                {
+                    userRepository = new Repository<User>(context);
+                }
+                return userRepository;
+            }
+        }
+
+        public IRepository<Role> RoleRepository
+        {
+            get
+            {
+                if (roleRepository == null)
+                {
+                    roleRepository = new Repository<Role>(context);
+                }
+                return roleRepository;
+            }
+        }
+
         public IRepository<Product> ProductRepository
         {
             get
@@ -35,7 +57,56 @@ namespace Flower.Core.Implementations
             }
         }
 
-        public IRepository<Category> CategoryRepository {
+        public IRepository<OrderDetail> OrderDetailRepository
+        {
+            get
+            {
+                if (orderDetailRepository == null)
+                {
+                    orderDetailRepository = new Repository<OrderDetail>(context);
+                }
+                return orderDetailRepository;
+            }
+        }
+
+        public IRepository<Order> OrderRepository
+        {
+            get
+            {
+                if (orderRepository == null)
+                {
+                    orderRepository = new Repository<Order>(context);
+                }
+                return orderRepository;
+            }
+        }
+
+        public IRepository<Image> ImageRepository
+        {
+            get
+            {
+                if (imageRepository == null)
+                {
+                    imageRepository = new Repository<Image>(context);
+                }
+                return imageRepository;
+            }
+        }
+
+        public IRepository<Discount> DiscountRepository
+        {
+            get
+            {
+                if (discountRepository == null)
+                {
+                    discountRepository = new Repository<Discount>(context);
+                }
+                return discountRepository;
+            }
+        }
+
+        public IRepository<Category> CategoryRepository
+        {
             get
             {
                 if (categoryRepository == null)

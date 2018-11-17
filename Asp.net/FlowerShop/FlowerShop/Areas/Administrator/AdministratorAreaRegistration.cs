@@ -15,10 +15,9 @@ namespace FlowerShop.Areas.Administrator
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Administrator_default",
+                "Admin_default",
                 "Administrator/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
-                new[] { "FlowerShop.Areas.Admin.Controllers" }
+                new { action = "Index", id = UrlParameter.Optional }
             );
         }
     }
