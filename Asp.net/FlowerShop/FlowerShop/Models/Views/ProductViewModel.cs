@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flower.Core.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace FlowerShop.Models.Views

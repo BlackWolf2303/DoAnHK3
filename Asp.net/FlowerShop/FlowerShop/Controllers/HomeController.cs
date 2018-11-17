@@ -1,5 +1,4 @@
-﻿using FlowerShop.DAL;
-using FlowerShop.Models.Views;
+﻿using FlowerShop.Models.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +12,77 @@ namespace FlowerShop.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            HomeServices homeServices = new HomeServices();
-            var product = AutoMapper.Mapper.Map<List<ProductViewModel>>(homeServices.GetAll());
-            return View(product);
+            //HomeServices homeServices = new HomeServices();
+            //var product = AutoMapper.Mapper.Map<List<ProductViewModel>>(homeServices.GetAll());
+            //return View(product);
+            return View();
         }
+
+        #region TestAjax
+        public ActionResult PartialViewWithAjax()
+        {
+            var model = GetFullAndPartialViewModel();
+            ViewBag.Catetories = model.CategoryList;
+            ViewBag.Products = model.Products;
+            return View(model);
+        }
+
+        private FullAndPartialViewModel GetFullAndPartialViewModel(int categoryId = 1)
+        {
+            //... code omitted...
+            // populate the viewModel and return it
+            var fullAndPartialViewModel = new FullAndPartialViewModel();
+
+            var listView = new List<FullAndPartialViewModel>
+            {
+                new FullAndPartialViewModel
+                {
+                    CategoryId = 1,
+                    CategoryList = new List<CategoryListItem>
+                    {
+                        new CategoryListItem {CategoryId= 1, CategoryName ="Category 1"},
+                        new CategoryListItem {CategoryId= 2, CategoryName ="Category 2"}
+                    },
+                    Products = new List<CategoryProductItem>
+                    {
+                        new CategoryProductItem {CategoryId = 1,Product ="Product 1"},
+                        new CategoryProductItem {CategoryId = 2,Product ="Product 2"},
+                    }
+                },
+                new FullAndPartialViewModel
+                {
+                    CategoryId = 2,
+                    CategoryList = new List<CategoryListItem>
+                    {
+                        new CategoryListItem {CategoryId= 4, CategoryName ="Category 3"},
+                        new CategoryListItem {CategoryId= 3, CategoryName ="Category 4"}
+                    },
+                    Products = new List<CategoryProductItem>
+                    {
+                        new CategoryProductItem {CategoryId = 3,Product ="Product 3"},
+                        new CategoryProductItem {CategoryId = 4,Product ="Product 4"},
+                    }
+                }
+            };
+
+            foreach (var item in listView)
+            {
+                if (item.CategoryId == categoryId)
+                {
+                    fullAndPartialViewModel = item;
+                }
+            }
+
+            return fullAndPartialViewModel;
+        }
+
+        [HttpGet]
+        public ActionResult GetCategoryProducts(string categoryId)
+        {
+            var lookupId = int.Parse(categoryId);
+            var model = GetFullAndPartialViewModel(lookupId).Products;
+            return PartialView("CategoryResults", model);
+        }
+        #endregion
     }
 }

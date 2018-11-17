@@ -1,0 +1,19 @@
+﻿using System;
+
+namespace Flower.Core.Entities
+{
+    public class OrderDetail : BaseEntity, ILogicalDeleteEntity
+    {
+        public double Price { get; set; }
+        public int Quantity { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
+        public bool Deleted { get; set; }
+
+        public int ProductId { get; set; }
+        public int OrderId { get; set; }
+
+        public Product Product { get; set; }
+        public Order Order { get; set; }
+    }
+}

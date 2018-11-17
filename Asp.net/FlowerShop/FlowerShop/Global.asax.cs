@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Flower.Core.Entities;
 using FlowerShop.Models;
 using FlowerShop.Models.Views;
 using System;
@@ -21,7 +22,8 @@ namespace FlowerShop
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // Model Mappers
-            Mapper.Initialize(cfg => {
+            Mapper.Initialize(cfg =>
+            {
                 // db to viewB
                 cfg.CreateMap<Category, CategoryViewModel>();
                 cfg.CreateMap<Discount, DiscountViewModel>();
@@ -43,11 +45,11 @@ namespace FlowerShop
             });
         }
         protected void Session_Start()
-    {
-      Session["userid"] = null;
-      Session["username"] = null;
-      Session["fullname"] = null;
-      Session["avatar"] = null;
-    }
+        {
+            Session["userid"] = null;
+            Session["username"] = null;
+            Session["fullname"] = null;
+            Session["avatar"] = null;
+        }
     }
 }

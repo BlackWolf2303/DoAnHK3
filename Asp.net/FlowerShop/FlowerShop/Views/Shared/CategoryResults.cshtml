@@ -1,0 +1,21 @@
+﻿
+@model List<FlowerShop.Models.Views.CategoryProductItem>
+<table>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Product</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.CategoryId</td>
+                <td>@product.Product</td>
+                <td>@product.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>  

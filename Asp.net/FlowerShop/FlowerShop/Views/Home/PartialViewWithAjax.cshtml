@@ -1,0 +1,30 @@
+﻿@model FlowerShop.Models.Views.FullAndPartialViewModel
+@{
+    ViewBag.Title = "PartialViewWithAjax";
+}
+
+<script type="text/javascript" src="CDN or local jquery file"></script>
+
+<div id="container">
+    <label for="ddlCategory"><strong>Select a category</strong></label>
+    @*@Html.DropDownListFor(
+        m =>m.CategoryId,
+        new SelectList( Model.CategoryList, "CategoryId", "CategoryName"),
+        new { id = "ddlCategory", @class = "test" })*@
+    <br /><br />
+    <div id="dvCategoryResults">
+        @{Html.RenderPartial("CategoryResults", Model.Products.ToList());}
+    </div>
+
+    @Html.DropDownList("ddlCategory", new SelectList(Model.CategoryList, "CategoryId", "CategoryName"),
+        new { /*id = "ddlCategory",*/ @class = "test" })
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#ddlCategory").change(function () {
+            var categoryId =  $("#ddlCategory").val();
+               $("#dvCategoryResults").load('@(Url.Action("GetCategoryProducts","Home",null, Request.Url.Scheme))?categoryId=' + categoryId);
+        });
+    });
+</script>

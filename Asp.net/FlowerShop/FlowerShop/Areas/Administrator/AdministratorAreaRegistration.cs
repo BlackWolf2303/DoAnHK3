@@ -2,22 +2,23 @@
 
 namespace FlowerShop.Areas.Administrator
 {
-    public class AdministratorAreaRegistration : AreaRegistration 
+    public class AdministratorAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "Administrator";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "Administrator_default",
                 "Administrator/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "FlowerShop.Areas.Admin.Controllers" }
             );
         }
     }
