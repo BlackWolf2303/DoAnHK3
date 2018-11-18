@@ -1,4 +1,6 @@
-﻿using FlowerShop.Models.Views;
+﻿using Flower.Core.Implementations;
+using Flower.Core.Interfaces;
+using FlowerShop.Models.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,11 @@ namespace FlowerShop.Controllers
 {
     public class HomeController : Controller
     {
+        private IUnitOfWork unitOfWork;
+        public HomeController()
+        {
+            unitOfWork = new UnitOfWork(new FlowerDbContext());
+        }
         // GET: Home
         public ActionResult Index()
         {
@@ -29,7 +36,7 @@ namespace FlowerShop.Controllers
             ViewBag.Sort = (int)SortBy.Ascending;
             ViewBag.Show = (int)Show.Four;
             ViewBag.CurrentPage = 1;
-            //ViewBag.CurrentPage = sortList.;
+            ViewBag.TotalProduct = unitOfWork.ProductRepository.GetAll().Count();
 
             return View();
         }

@@ -31,7 +31,7 @@
                             <li class="firstPage"><a>1</a></li>
                             <li class="midPage"><a>2</a></li>
                             <li class="lastPage"><a>3</a></li>
-                            <li class="last">[<a>Next</a>]</li>
+                            <li class="end">[<a>Next</a>]</li>
                         </ul>
                     </p>
                 </div>
@@ -67,7 +67,7 @@
                             <li class="firstPage"><a>1</a></li>
                             <li class="midPage"><a>2</a></li>
                             <li class="lastPage"><a>3</a></li>
-                            <li class="last">[<a>End</a>]</li>
+                            <li class="end">[<a>End</a>]</li>
                         </ul>
                     </p>
                 </div>
@@ -84,169 +84,133 @@
     </div>
 </div>
 <script type="text/javascript">
-    // xử lý show paging
-    // Panging on click
-    // 1. Get current page
-    // 2. Paging Animation
 
     $(document).ready(function () {
-        var show = @ViewBag.Show;
-        var sort = @ViewBag.Sort;
+        var show = parseInt(@ViewBag.Show);
+        var sort = parseInt(@ViewBag.Sort);
         var currentPage = parseInt(@ViewBag.CurrentPage);
         var bestSellerCurrentPage = currentPage;
         var newProductsCurrentPage = currentPage;
+        var totalPage = parseInt(parseInt(@ViewBag.TotalProduct) / show) + 1;
 
         $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show + '&currentPage=' + currentPage);
         $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show + '&currentPage=' + currentPage);
 
-        if (bestSellerCurrentPage < 2) {
+
+        ChangeBestSellerPage(bestSellerCurrentPage, totalPage);
+        ChangeNewProductsPage(newProductsCurrentPage, totalPage);
+
+        // BestSeller
+        $("#bestSellerPaging a").click(function () {
+            event.preventDefault();
+
+            if ($(this).parent().hasClass("end")) {
+                bestSellerCurrentPage = totalPage;
+            } else if ($(this).parent().hasClass("first")) {
+                bestSellerCurrentPage = 1;
+            } else {
+                bestSellerCurrentPage = parseInt($(this).text());
+            }
+
+            $("#bestSellerPaging li").removeClass("active");
+            ChangeBestSellerPage(bestSellerCurrentPage, totalPage);
+
+            $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show + '&currentPage=' + bestSellerCurrentPage);
+        });
+        $("#BestSellerShow").change(function () {
+            show = $("#BestSellerShow").val();
+            $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show);
+        });
+        $("#BestSellerSortBy").change(function () {
+            sort = $("#BestSellerSortBy").val();
+            $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show);
+        });
+
+        // NewProducts
+        $("#newProductsPaging a").click(function () {
+            event.preventDefault();
+
+            if ($(this).parent().hasClass("end")) {
+                newProductsCurrentPage = totalPage;
+            } else if ($(this).parent().hasClass("first")) {
+                newProductsCurrentPage = 1;
+            } else {
+                newProductsCurrentPage = parseInt($(this).text());
+            }
+
+            $("#newProductsPaging li").removeClass("active");
+            ChangeNewProductsPage(newProductsCurrentPage, totalPage);
+            //alert(currentPage);
+            $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show + '&currentPage=' + newProductsCurrentPage);
+        });
+
+        $("#NewProSortBy").change(function () {
+            sort = $("#NewProSortBy").val();
+            $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show);
+        });
+        $("#NewProShow").change(function () {
+            show = $("#NewProShow").val();
+            $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show);
+        });
+    });
+
+    function ChangeBestSellerPage(currentPage, totalPage) {
+        if (currentPage == 1) {
+            $("#bestSellerPaging .firstPage a").html(currentPage);
+            $("#bestSellerPaging .firstPage").addClass("active");
+            $("#bestSellerPaging .midPage a").html(parseInt(currentPage) + 1);
+            $("#bestSellerPaging .lastPage a").html(currentPage + 2);
+        } else if (currentPage == totalPage) {
+            $("#bestSellerPaging .firstPage a").html(currentPage - 2);
+            $("#bestSellerPaging .midPage a").html(currentPage - 1);
+            $("#bestSellerPaging .lastPage a").html(currentPage);
+            $("#bestSellerPaging .lastPage").addClass("active");
+        } else {
+            $("#bestSellerPaging .firstPage a").html(currentPage - 1);
+            $("#bestSellerPaging .midPage a").html(currentPage);
+            $("#bestSellerPaging .midPage").addClass("active");
+            $("#bestSellerPaging .lastPage a").html(currentPage + 1);
+        }
+
+        if (currentPage < 3) {
             $("#bestSellerPaging .first").hide();
             $("#bestSellerPaging .end").show();
-        } else if (bestSellerCurrentPage > (5 - 2)) {
+        } else if (currentPage > (totalPage - 2)) {
             $("#bestSellerPaging .first").show();
             $("#bestSellerPaging .end").hide();
         } else {
             $("#bestSellerPaging .first").show();
             $("#bestSellerPaging .end").show();
         }
+    }
 
-        if (bestSellerCurrentPage == 1) {
-            $("#bestSellerPaging .firstPage a").html(bestSellerCurrentPage);
-            $("#bestSellerPaging .firstPage").addClass("active");
-            $("#bestSellerPaging .midPage a").html(parseInt(bestSellerCurrentPage) + 1);
-            $("#bestSellerPaging .lastPage a").html(bestSellerCurrentPage + 2);
-        } else if (bestSellerCurrentPage == 5) {
-            $("#bestSellerPaging .firstPage a").html(bestSellerCurrentPage - 2);
-            $("#bestSellerPaging .midPage a").html(bestSellerCurrentPage - 1);
-            $("#bestSellerPaging .lastPage a").html(bestSellerCurrentPage);
-            $("#bestSellerPaging .lastPage").addClass("active");
-        } else {
-            $("#bestSellerPaging .onePage a").html(bestSellerCurrentPage - 1);
-            $("#bestSellerPaging .midPage a").html(bestSellerCurrentPage);
-            $("#bestSellerPaging .midPage").addClass("active");
-            $("#bestSellerPaging .lastPage a").html(bestSellerCurrentPage + 1);
-        }
-
-        if (newProductsCurrentPage == 1) {
-            $("#newProductsPaging .firstPage a").html(newProductsCurrentPage);
+    function ChangeNewProductsPage(currentPage, totalPage) {
+        if (currentPage == 1) {
+            $("#newProductsPaging .firstPage a").html(currentPage);
             $("#newProductsPaging .firstPage").addClass("active");
-            $("#newProductsPaging .midPage a").html(newProductsCurrentPage + 1);
-            $("#newProductsPaging .lastPage a").html(newProductsCurrentPage + 2);
-        } else if (newProductsCurrentPage == 5) {
-            $("#newProductsPaging .firstPage a").html(newProductsCurrentPage - 2);
-            $("#newProductsPaging .midPage a").html(newProductsCurrentPage - 1);
-            $("#newProductsPaging .lastPage a").html(newProductsCurrentPage);
+            $("#newProductsPaging .midPage a").html(currentPage + 1);
+            $("#newProductsPaging .lastPage a").html(currentPage + 2);
+        } else if (currentPage == totalPage) {
+            $("#newProductsPaging .firstPage a").html(currentPage - 2);
+            $("#newProductsPaging .midPage a").html(currentPage - 1);
+            $("#newProductsPaging .lastPage a").html(currentPage);
             $("#newProductsPaging .lastPage").addClass("active");
         } else {
-            $("#newProductsPaging .onePage a").html(newProductsCurrentPage - 1);
-            $("#newProductsPaging .midPage a").html(newProductsCurrentPage);
+            $("#newProductsPaging .firstPage a").html(currentPage - 1);
+            $("#newProductsPaging .midPage a").html(currentPage);
             $("#newProductsPaging .midPage").addClass("active");
-            $("#newProductsPaging .lastPage a").html(newProductsCurrentPage + 1);
+            $("#newProductsPaging .lastPage a").html(currentPage + 1);
         }
 
-        // BestSeller
-        $("#bestSellerPaging a").click(function () {
-            event.preventDefault();
-            if ($(this).parent().hasClass("end")) {
-                newProductsCurrentPage++;
-            } else if ($(this).hasClass("first")) {
-                newProductsCurrentPage--;
-                alert(newProductsCurrentPage);
-            } else {
-                newProductsCurrentPage = parseInt($(this).text());
-            }
-
-            if (bestSellerCurrentPage < 2) {
-                $("#bestSellerPaging .first").hide();
-                $("#bestSellerPaging .end").show();
-            } else if (bestSellerCurrentPage > (5 - 2)) {
-                $("#bestSellerPaging .first").show();
-                $("#bestSellerPaging .end").hide();
-            } else {
-                $("#bestSellerPaging .first").show();
-                $("#bestSellerPaging .end").show();
-            }
-
-            $("#bestSellerPaging li").removeClass("active");
-            if (bestSellerCurrentPage == 1) {
-                $("#bestSellerPaging .firstPage a").html(bestSellerCurrentPage);
-                $("#bestSellerPaging .firstPage").addClass("active");
-                $("#bestSellerPaging .midPage a").html(bestSellerCurrentPage + 1);
-                $("#bestSellerPaging .lastPage a").html(bestSellerCurrentPage + 2);
-            } else if (bestSellerCurrentPage == 5) {
-                $("#bestSellerPaging .firstPage a").html(bestSellerCurrentPage - 2);
-                $("#bestSellerPaging .midPage a").html(bestSellerCurrentPage - 1);
-                $("#bestSellerPaging .lastPage a").html(bestSellerCurrentPage);
-                $("#bestSellerPaging .lastPage").addClass("active");
-            } else {
-                $("#bestSellerPaging .firstPage a").html(bestSellerCurrentPage - 1);
-                $("#bestSellerPaging .midPage a").html(bestSellerCurrentPage);
-                $("#bestSellerPaging .midPage").addClass("active");
-                $("#bestSellerPaging .lastPage a").html(bestSellerCurrentPage + 1);
-            }
-            $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show + '&currentPage=' + bestSellerCurrentPage);
-        });
-        $("#BestSellerShow").change(function () {
-            show = $("#BestSellerShow").val();
-            $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show /*+ '&currentPage=' + currentPage*/);
-        });
-        $("#BestSellerSortBy").change(function () {
-            sort = $("#BestSellerSortBy").val();
-            $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show /*+ '&currentPage=' + currentPage*/);
-        });
-
-        // NewProducts
-        $("#newProductsPaging a").click(function () {
-            event.preventDefault();
-            if ($(this).parent().hasClass("end")) {
-                newProductsCurrentPage++;
-            } else if ($(this).parent().hasClass("end")) {
-                newProductsCurrentPage--;
-            } else {
-                newProductsCurrentPage = parseInt($(this).text());
-            }
-
-            if (bestSellerCurrentPage < 2) {
-                $("#bestSellerPaging .first").hide();
-                $("#bestSellerPaging .end").show();
-            } else if (bestSellerCurrentPage > (5 - 2)) {
-                $("#bestSellerPaging .first").show();
-                $("#bestSellerPaging .end").hide();
-            } else {
-                $("#bestSellerPaging .first").show();
-                $("#bestSellerPaging .end").show();
-            }
-
-            $("#newProductsPaging li").removeClass("active");
-            if (newProductsCurrentPage == 1) {
-                $("#newProductsPaging .firstPage a").html(newProductsCurrentPage);
-                $("#newProductsPaging .firstPage").addClass("active");
-                $("#newProductsPaging .midPage a").html(newProductsCurrentPage + 1);
-                $("#newProductsPaging .lastPage a").html(newProductsCurrentPage + 2);
-            } else if (newProductsCurrentPage == 5) {
-                $("#newProductsPaging .firstPage a").html(newProductsCurrentPage - 2);
-                $("#newProductsPaging .midPage a").html(newProductsCurrentPage - 1);
-                $("#newProductsPaging .lastPage a").html(newProductsCurrentPage);
-                $("#newProductsPaging .lastPage").addClass("active");
-            } else {
-                $("#newProductsPaging .firstPage a").html(newProductsCurrentPage - 1);
-                $("#newProductsPaging .midPage a").html(newProductsCurrentPage);
-                $("#newProductsPaging .midPage").addClass("active");
-                $("#newProductsPaging .lastPage a").html(newProductsCurrentPage + 1);
-            }
-            //alert(currentPage);
-            $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show + '&currentPage=' + newProductsCurrentPage);
-        });
-        $("#NewProSortBy").change(function () {
-            sort = $("#NewProSortBy").val();
-            $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show /*+ '&currentPage=' + currentPage*/);
-        });
-        $("#NewProShow").change(function () {
-            // var currentPage = ???
-            show = $("#NewProShow").val();
-            sort = $("#NewProSortBy").val();
-            $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show /*+ '&currentPage=' + currentPage*/);
-        });
-    });
-
+        if (currentPage < 3) {
+            $("#newProductsPaging .first").hide();
+            $("#newProductsPaging .end").show();
+        } else if (currentPage > (totalPage - 2)) {
+            $("#newProductsPaging .first").show();
+            $("#newProductsPaging .end").hide();
+        } else {
+            $("#newProductsPaging .first").show();
+            $("#newProductsPaging .end").show();
+        }
+    }
 </script>
