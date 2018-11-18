@@ -1,4 +1,5 @@
-﻿using Flower.Core.Entities;
+﻿using AutoMapper;
+using Flower.Core.Entities;
 using Flower.Core.Implementations;
 using Flower.Core.Interfaces;
 using FlowerShop.Models.Views;
@@ -54,20 +55,53 @@ namespace FlowerShop.Controllers
             return PartialView(images);
         }
 
-        public ActionResult ProductList()
+        public ActionResult ProductList(int sort = (int)SortBy.Ascending, int show = (int)Show.Four, int currentPage = 1)
         {
-            var products = new List<ProductViewModel>
+            #region TempData
+            //var products = new List<ProductViewModel>
+            //{
+            //    new ProductViewModel{Name = "Rose", Price = 100, Description = "Description 1",
+            //        Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } },
+            //    new ProductViewModel{Name = "Sun Flower", Price = 500, Description = "Description 2",
+            //        Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } },
+            //    new ProductViewModel{Name = "Apricot blossom", Price = 700, Description = "Description 3",
+            //        Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } },
+            //    new ProductViewModel{Name = "Sakura", Price = 300, Description = "Description 4",
+            //        Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } },
+            //    new ProductViewModel{Name = "Rose", Price = 900, Description = "Description 5",
+            //        Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } },
+            //    new ProductViewModel{Name = "Sun Flower", Price = 200, Description = "Description 6",
+            //        Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } },
+            //    new ProductViewModel{Name = "Apricot blossom", Price = 400, Description = "Description 7",
+            //        Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } },
+            //    new ProductViewModel{Name = "Sakura", Price = 500, Description = "Description 8",
+            //        Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } }
+            //};
+            #endregion
+
+            var products = Mapper.Map<List<ProductViewModel>>(unitOfWork.ProductRepository.GetAll());
+
+            switch (sort)
             {
-                new ProductViewModel{Name = "Rose", Price = 300, Description = "Description 1",
-                    Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } },
-                new ProductViewModel{Name = "Sun Flower", Price = 300, Description = "Description 2",
-                    Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } },
-                new ProductViewModel{Name = "Apricot blossom", Price = 300, Description = "Description 3",
-                    Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } },
-                new ProductViewModel{Name = "Sakura", Price = 300, Description = "Description 4",
-                    Images = new List<ImageViewModel>{ new ImageViewModel{ Path = "pic4.png" } } }
-            };
-            return PartialView(products);
+                case (int)SortBy.Ascending:
+                    products = products.OrderBy(o => o.Price).ToList();
+                    break;
+                case (int)SortBy.Descending:
+                    products = products.OrderByDescending(o => o.Price).ToList();
+                    break;
+                default:
+                    break;
+            }
+
+            //products = products.Take(show).ToList();
+            var proCurrentPage = new List<ProductViewModel>();
+            var count = ((currentPage - 1) * show + show) > products.Count ? products.Count - ((currentPage - 1) * show) : show;
+            for (int i = 0; i < count; i++)
+            {
+                proCurrentPage.Add(products.ElementAt((currentPage - 1) * show + i));
+            }
+
+            return PartialView(proCurrentPage);
         }
         #endregion
 

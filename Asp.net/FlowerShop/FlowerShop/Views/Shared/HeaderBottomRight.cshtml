@@ -1,0 +1,16 @@
+﻿@model IList<FlowerShop.Models.Views.ImageViewModel>
+
+<div class="header_bottom_right_images">
+    <!-- FlexSlider -->
+    <section class="slider">
+        <div class="flexslider">
+            <ul class="slides">
+                @foreach (var image in Model)
+                {
+                    <li><img src="~/Content/images/@image.Path" alt="No Image" /></li>
+                }
+            </ul>
+        </div>
+    </section>
+    <!-- FlexSlider -->
+</div>

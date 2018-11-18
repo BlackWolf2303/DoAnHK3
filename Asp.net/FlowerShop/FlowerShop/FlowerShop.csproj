@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="Models\Views\CategoryViewModel.cs" />
     <Compile Include="Models\Views\DiscountViewModel.cs" />
+    <Compile Include="Models\Views\Enum.cs" />
     <Compile Include="Models\Views\FullAndPartialViewModel.cs" />
     <Compile Include="Models\Views\ImageViewModel.cs" />
     <Compile Include="Models\Views\OrderDetailViewModel.cs" />
@@ -2278,18 +2279,20 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Faq\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
-    <Content Include="Views\Products\HeaderBottomLeft.cshtml" />
+    <Content Include="Views\Product\HeaderBottomLeft.cshtml" />
     <Content Include="Views\Shared\_PartialPage1.cshtml" />
-    <Content Include="Views\Products\HeaderBottomRight.cshtml" />
-    <Content Include="Views\Products\ProductList.cshtml" />
+    <Content Include="Views\Product\HeaderBottomRight.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Home\PartialViewWithAjax.cshtml" />
     <Content Include="Views\Shared\CategoryResults.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Shared\HeaderBottomLeft.cshtml" />
+    <Content Include="Views\Shared\HeaderBottomRight.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,9 +12,25 @@ namespace FlowerShop.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //HomeServices homeServices = new HomeServices();
-            //var product = AutoMapper.Mapper.Map<List<ProductViewModel>>(homeServices.GetAll());
-            //return View(product);
+            var sortList = new Dictionary<int, string>();
+            foreach (var item in Enum.GetValues(typeof(SortBy)))
+            {
+                sortList.Add((int)item, item.ToString());
+            }
+
+            var showList = new Dictionary<int, string>();
+            foreach (var item in Enum.GetValues(typeof(Show)))
+            {
+                showList.Add((int)item, item.ToString());
+            }
+
+            ViewBag.SortList = sortList;
+            ViewBag.ShowList = showList;
+            ViewBag.Sort = (int)SortBy.Ascending;
+            ViewBag.Show = (int)Show.Four;
+            ViewBag.CurrentPage = 1;
+            //ViewBag.CurrentPage = sortList.;
+
             return View();
         }
 

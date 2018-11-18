@@ -77,7 +77,8 @@
     @foreach (var product in Model)
     {
         <div class="grid_1_of_4 images_1_of_4">
-            <a href="preview-2.html"><img src="~/Content/images/@product.Images.FirstOrDefault().Path" alt="" /></a>
+            <a href="preview-2.html"><img src="~/Content/images/pic4.png" alt="" /></a>
+            @*<a href="preview-2.html"><img src="~/Content/images/@product.Images.FirstOrDefault().Path" alt="" /></a>*@
             <h2>@product.Name</h2>
             <p>@product.Description</p>
             <p><span class="strike">@product.Price</span><span class="price">@product.Price</span></p>
