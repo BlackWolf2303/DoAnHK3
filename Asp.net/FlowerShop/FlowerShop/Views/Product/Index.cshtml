@@ -1,13 +1,13 @@
 ﻿
 @{
-  ViewBag.Title = "Products";
+  ViewBag.Title = "Product";
 }
 
 <div class="content">
     <!-- #region ContentTop -->
     <div class="content_top">
         <div class="heading">
-            <h3>Feature Products</h3>
+            <h3>Feature Product</h3>
         </div>
         <div class="sort">
             <p>
@@ -49,54 +49,58 @@
     </div>
     <!-- #endregion -->
     <!-- #region BEST SELLER PRODUCT -->
-    @{Html.RenderAction("ProductList", "Products");}
-    <!-- #endregion -->
-    <!-- #region content_bottom -->
-    <div class="content_bottom">
-        <div class="heading">
-            <h3>New Products</h3>
-        </div>
-        <div class="sort">
-            <p>
-                Sort by:
-                <select>
-                    <option>Lowest Price</option>
-                    <option>Highest Price</option>
-                    <option>Lowest Price</option>
-                    <option>Lowest Price</option>
-                    <option>Lowest Price</option>
-                    <option>In Stock</option>
-                </select>
-            </p>
-        </div>
-        <div class="show">
-            <p>
-                Show:
-                <select>
-                    <option>4</option>
-                    <option>8</option>
-                    <option>12</option>
-                    <option>16</option>
-                    <option>20</option>
-                    <option>In Stock</option>
-                </select>
-            </p>
-        </div>
-        <div class="page-no">
-            <p>
-                Result Pages:<ul>
-                    <li><a href="#">1</a></li>
-                    <li class="active"><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li>[<a href="#"> Next>>></a>]</li>
-                </ul>
-            </p>
-        </div>
-        <div class="clear"></div>
+    <div class="section group">
+        @{
+            Html.RenderAction("ProductList", "Product");
+        }
     </div>
     <!-- #endregion -->
+    <!-- #region content_bottom -->
+    @*<div class="content_bottom">
+            <div class="heading">
+                <h3>New Product</h3>
+            </div>
+            <div class="sort">
+                <p>
+                    Sort by:
+                    <select>
+                        <option>Lowest Price</option>
+                        <option>Highest Price</option>
+                        <option>Lowest Price</option>
+                        <option>Lowest Price</option>
+                        <option>Lowest Price</option>
+                        <option>In Stock</option>
+                    </select>
+                </p>
+            </div>
+            <div class="show">
+                <p>
+                    Show:
+                    <select>
+                        <option>4</option>
+                        <option>8</option>
+                        <option>12</option>
+                        <option>16</option>
+                        <option>20</option>
+                        <option>In Stock</option>
+                    </select>
+                </p>
+            </div>
+            <div class="page-no">
+                <p>
+                    Result Pages:<ul>
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li>[<a href="#"> Next>>></a>]</li>
+                    </ul>
+                </p>
+            </div>
+            <div class="clear"></div>
+        </div>*@
+    <!-- #endregion -->
     <!-- #region section group -->
-    @{Html.RenderAction("ProductList", "Products");}
+    @*@{Html.RenderAction("ProductList", "Product");}*@
     <!-- #endregion -->
 </div>
 

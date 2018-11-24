@@ -1,6 +1,8 @@
-﻿using Flower.Core.Implementations;
+﻿using AutoMapper;
+using Flower.Core.Implementations;
 using Flower.Core.Interfaces;
 using FlowerShop.Models.Views;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,26 +21,24 @@ namespace FlowerShop.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var sortList = new Dictionary<int, string>();
-            foreach (var item in Enum.GetValues(typeof(SortBy)))
-            {
-                sortList.Add((int)item, item.ToString());
-            }
-
-            var showList = new Dictionary<int, string>();
-            foreach (var item in Enum.GetValues(typeof(Show)))
-            {
-                showList.Add((int)item, item.ToString());
-            }
-
-            ViewBag.SortList = sortList;
-            ViewBag.ShowList = showList;
-            ViewBag.Sort = (int)SortBy.Ascending;
-            ViewBag.Show = (int)Show.Four;
-            ViewBag.CurrentPage = 1;
-            ViewBag.TotalProduct = unitOfWork.ProductRepository.GetAll().Count();
-
             return View();
+        }
+
+        public ActionResult HomeList(int? listType)
+        {
+            var products = Mapper.Map<List<ProductViewModel>>(unitOfWork.ProductRepository.GetAll().ToList());
+            switch (listType)
+            {
+                case 1:
+                    products = products.OrderByDescending(p => p.OrderDetails.Count).Take(4).ToList();
+                    break;
+                case 2:
+                    products = products.OrderBy(p => p.Created).Take(4).ToList();
+                    break;
+                default:
+                    break;
+            }
+            return PartialView(products);
         }
 
         #region TestAjax

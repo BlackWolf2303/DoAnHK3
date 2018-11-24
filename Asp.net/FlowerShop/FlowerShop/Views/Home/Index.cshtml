@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Home";
 }
 
@@ -13,204 +14,46 @@
 
     <div class="main">
         <div class="content">
-            <!-- #region BEST SELLER PRODUCT Nav -->
-            <div class="content_top">
-                <div class="heading">
-                    <h3>Feature Product</h3>
-                </div>
-                <div class="sort">
-                    <p>Sort by: @Html.DropDownList("BestSellerSortBy", new SelectList(ViewBag.SortList, "Key", "Value"))</p>
-                </div>
-                <div class="show">
-                    <p>Show: @Html.DropDownList("BestSellerShow", new SelectList(ViewBag.ShowList, "Key", "Key"))</p>
-                </div>
-                <div class="page-no">
-                    <p>
-                        Result Pages: <ul id="bestSellerPaging">
-                            <li class="first">[<a>Previous</a>]</li>
-                            <li class="firstPage"><a>1</a></li>
-                            <li class="midPage"><a>2</a></li>
-                            <li class="lastPage"><a>3</a></li>
-                            <li class="end">[<a>Next</a>]</li>
-                        </ul>
-                    </p>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <!-- #endregion -->
-            <!-- #region BEST SELLER PRODUCT List -->
-            <div id="BestSeller">
-                @*@{Html.RenderAction("ProductList", "Product");}*@
-            </div>
-            <!-- #endregion -->
             <!-- #region New Product Nav -->
             <div class="content_bottom">
                 <div class="heading">
                     <h3>New Product</h3>
-                </div>
-                <div class="sort">
-                    <p>
-                        Sort by:
-                        @Html.DropDownList("NewProSortBy", new SelectList(ViewBag.SortList, "Key", "Value"))
-                    </p>
-                </div>
-                <div class="show">
-                    <p>
-                        Show:
-                        @Html.DropDownList("NewProShow", new SelectList(ViewBag.ShowList, "Key", "Key"))
-                    </p>
-                </div>
-                <div class="page-no">
-                    <p>
-                        Result Pages:<ul id="newProductsPaging">
-                            <li class="first">[<a>First</a>]</li>
-                            <li class="firstPage"><a>1</a></li>
-                            <li class="midPage"><a>2</a></li>
-                            <li class="lastPage"><a>3</a></li>
-                            <li class="end">[<a>End</a>]</li>
-                        </ul>
-                    </p>
                 </div>
                 <div class="clear"></div>
             </div>
             <!-- #endregion -->
             <!-- #region New Product List -->
             <div id="NewProducts">
-                @*@{Html.RenderAction("ProductList", "Product");}*@
+                <div class="section group">
+                    @{
+                        Html.RenderAction("HomeList", new { listType = 1 });
+                    }
+                </div>
+            </div>
+            <!-- #endregion -->
+        </div>
+
+        <div class="content">
+            <!-- #region BEST SELLER PRODUCT Nav -->
+            <!-- #endregion -->
+            <!-- #region New Product Nav -->
+            <div class="content_bottom">
+                <div class="heading">
+                    <h3>New Product</h3>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <!-- #endregion -->
+            <!-- #region New Product List -->
+            <div id="NewProducts">
+                <div class="section group">
+                    @{
+                        Html.RenderAction("HomeList", new { listType = 2 });
+                    }
+                </div>
             </div>
             <!-- #endregion -->
         </div>
 
     </div>
 </div>
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        var show = parseInt(@ViewBag.Show);
-        var sort = parseInt(@ViewBag.Sort);
-        var currentPage = parseInt(@ViewBag.CurrentPage);
-        var bestSellerCurrentPage = currentPage;
-        var newProductsCurrentPage = currentPage;
-        var totalPage = parseInt(parseInt(@ViewBag.TotalProduct) / show) + 1;
-
-        $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show + '&currentPage=' + currentPage);
-        $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show + '&currentPage=' + currentPage);
-
-
-        ChangeBestSellerPage(bestSellerCurrentPage, totalPage);
-        ChangeNewProductsPage(newProductsCurrentPage, totalPage);
-
-        // BestSeller
-        $("#bestSellerPaging a").click(function () {
-            event.preventDefault();
-
-            if ($(this).parent().hasClass("end")) {
-                bestSellerCurrentPage = totalPage;
-            } else if ($(this).parent().hasClass("first")) {
-                bestSellerCurrentPage = 1;
-            } else {
-                bestSellerCurrentPage = parseInt($(this).text());
-            }
-
-            $("#bestSellerPaging li").removeClass("active");
-            ChangeBestSellerPage(bestSellerCurrentPage, totalPage);
-
-            $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show + '&currentPage=' + bestSellerCurrentPage);
-        });
-        $("#BestSellerShow").change(function () {
-            show = $("#BestSellerShow").val();
-            $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show);
-        });
-        $("#BestSellerSortBy").change(function () {
-            sort = $("#BestSellerSortBy").val();
-            $("#BestSeller").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show);
-        });
-
-        // NewProducts
-        $("#newProductsPaging a").click(function () {
-            event.preventDefault();
-
-            if ($(this).parent().hasClass("end")) {
-                newProductsCurrentPage = totalPage;
-            } else if ($(this).parent().hasClass("first")) {
-                newProductsCurrentPage = 1;
-            } else {
-                newProductsCurrentPage = parseInt($(this).text());
-            }
-
-            $("#newProductsPaging li").removeClass("active");
-            ChangeNewProductsPage(newProductsCurrentPage, totalPage);
-            //alert(currentPage);
-            $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show + '&currentPage=' + newProductsCurrentPage);
-        });
-
-        $("#NewProSortBy").change(function () {
-            sort = $("#NewProSortBy").val();
-            $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show);
-        });
-        $("#NewProShow").change(function () {
-            show = $("#NewProShow").val();
-            $("#NewProducts").load('@(Url.Action("ProductList", "Product", null, Request.Url.Scheme))?sort=' + sort + '&show=' + show);
-        });
-    });
-
-    function ChangeBestSellerPage(currentPage, totalPage) {
-        if (currentPage == 1) {
-            $("#bestSellerPaging .firstPage a").html(currentPage);
-            $("#bestSellerPaging .firstPage").addClass("active");
-            $("#bestSellerPaging .midPage a").html(parseInt(currentPage) + 1);
-            $("#bestSellerPaging .lastPage a").html(currentPage + 2);
-        } else if (currentPage == totalPage) {
-            $("#bestSellerPaging .firstPage a").html(currentPage - 2);
-            $("#bestSellerPaging .midPage a").html(currentPage - 1);
-            $("#bestSellerPaging .lastPage a").html(currentPage);
-            $("#bestSellerPaging .lastPage").addClass("active");
-        } else {
-            $("#bestSellerPaging .firstPage a").html(currentPage - 1);
-            $("#bestSellerPaging .midPage a").html(currentPage);
-            $("#bestSellerPaging .midPage").addClass("active");
-            $("#bestSellerPaging .lastPage a").html(currentPage + 1);
-        }
-
-        if (currentPage < 3) {
-            $("#bestSellerPaging .first").hide();
-            $("#bestSellerPaging .end").show();
-        } else if (currentPage > (totalPage - 2)) {
-            $("#bestSellerPaging .first").show();
-            $("#bestSellerPaging .end").hide();
-        } else {
-            $("#bestSellerPaging .first").show();
-            $("#bestSellerPaging .end").show();
-        }
-    }
-
-    function ChangeNewProductsPage(currentPage, totalPage) {
-        if (currentPage == 1) {
-            $("#newProductsPaging .firstPage a").html(currentPage);
-            $("#newProductsPaging .firstPage").addClass("active");
-            $("#newProductsPaging .midPage a").html(currentPage + 1);
-            $("#newProductsPaging .lastPage a").html(currentPage + 2);
-        } else if (currentPage == totalPage) {
-            $("#newProductsPaging .firstPage a").html(currentPage - 2);
-            $("#newProductsPaging .midPage a").html(currentPage - 1);
-            $("#newProductsPaging .lastPage a").html(currentPage);
-            $("#newProductsPaging .lastPage").addClass("active");
-        } else {
-            $("#newProductsPaging .firstPage a").html(currentPage - 1);
-            $("#newProductsPaging .midPage a").html(currentPage);
-            $("#newProductsPaging .midPage").addClass("active");
-            $("#newProductsPaging .lastPage a").html(currentPage + 1);
-        }
-
-        if (currentPage < 3) {
-            $("#newProductsPaging .first").hide();
-            $("#newProductsPaging .end").show();
-        } else if (currentPage > (totalPage - 2)) {
-            $("#newProductsPaging .first").show();
-            $("#newProductsPaging .end").hide();
-        } else {
-            $("#newProductsPaging .first").show();
-            $("#newProductsPaging .end").show();
-        }
-    }
-</script>
