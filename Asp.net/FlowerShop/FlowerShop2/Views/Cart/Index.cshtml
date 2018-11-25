@@ -17,19 +17,19 @@
         <td>Qty</td>
         <td>Total</td>
       </tr>
-      @{ int i = 0; }
+      @{ int index = 0; }
       @foreach (var item in cart)
       {
         <tr>
-          <td><a href="@Url.Action("Delete","Cart", new {id = i })">X</a></td>
+          <td><a href="@Url.Action("Delete","Cart", new {id = index })">X</a></td>
           <td><a href="@Url.Action("Details","Product", new { id = item.product.id})"><img src="@Url.Content("~/Content/User/")images/@item.product.photo" alt="" class="cart_thumb" border="0" width="30" height="31"></a></td>
           <td>@item.product.name</td>
           <td>@item.product.price$</td>
           <td>@item.quantity</td>
           <td>@(item.product.price * item.quantity )$</td>
         </tr>
-        i++
-        }
+        index++;
+      }
       <tr>
         <td colspan="5" class="cart_total"><span class="red">TOTAL:</span></td>
         <td>
@@ -43,7 +43,8 @@
       </tr>
     </tbody>
   </table>
-  <a href="" class="continue">&lt; continue</a> <a href="" class="checkout">checkout &gt;</a>
+  <a href="@Url.Action("index","Home")" class="continue">&lt; continue</a>
+  <a href="" class="checkout">checkout &gt;</a>
 </div>
 <div class="clear"></div>
 

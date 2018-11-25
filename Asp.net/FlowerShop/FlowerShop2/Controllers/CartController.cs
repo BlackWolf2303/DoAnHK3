@@ -30,16 +30,32 @@ namespace FlowerShop2.Controllers
       else
       {
         List<Item> cart = (List<Item>)(Session["cart"];
-        cart.Add(new Item()
+        int index = isExits(id);
+        if (index == -1)
         {
-          product = iProductRepository.find(id),
-          quantity = 1
-        });
+          cart.Add(new Item()
+          {
+            product = iProductRepository.find(id),
+            quantity = 1
+          });
+        } else
+        {
+          cart[index].quantity = cart[index].quantity + 1;
+        }
+
         Session["cart"] = cart;
       }
       return View(Index);
     }
 
+    private int isExits(int id)
+    {
+      List<Item> cart = (List<Item>)(Session["cart"];
+      for (int i = 0; i < cart.Count; i++)
+        if (cart[i].product.Id == id)
+          return i;
+      return -1;
+    }
     public ActionResult Delete(int id)
     {
       List<Item> cart = (List<Item>)(Session["cart"];
