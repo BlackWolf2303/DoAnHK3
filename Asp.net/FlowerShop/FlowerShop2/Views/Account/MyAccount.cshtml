@@ -1,35 +1,36 @@
 ﻿
 @{
-    ViewBag.Title = "MyAccount";
-    Layout = "~/Views/Shared/LayoutUser.cshtml";
+  ViewBag.Title = "MyAccount";
+  Layout = "~/Views/Shared/LayoutUser.cshtml";
 }
 
+@model FlowerShop2.Models.Account
 
 <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt=""></span>My account</div>
 <div class="feat_prod_box_details">
-    <p class="details"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
-    <div class="contact_form">
-        <div class="form_subtitle">login into your account</div>
-        <form name="register" href="">
-            <div class="form_row">
-                <@Url.Content("~/Content/User/")images class="contact"><strong>Username:</strong></@Url.Content("~/Content/User/")images>
-                <input type="text" class="contact_input">
-            </div>
-            <div class="form_row">
-                <@Url.Content("~/Content/User/")images class="contact"><strong>Password:</strong></@Url.Content("~/Content/User/")images>
-                <input type="text" class="contact_input">
-            </div>
-            <div class="form_row">
-                <div class="terms">
-                    <input type="checkbox" name="terms">
-                    Remember me
-                </div>
-            </div>
-            <div class="form_row">
-                <input type="submit" class="register" value="login">
-            </div>
-        </form>
-    </div>
+  <p class="details"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
+  <div class="contact_form">
+    <div class="form_subtitle">login into your account</div>
+
+    @ViewBag.error
+    @using (Html.BeginForm("MyAccount", "Account", FormMethod.Post))
+    {
+      <div class="form_row">
+        <@Url.Content("~/Content/User/")images class="contact">
+          <strong>Username:</strong></@Url.Content("~/Content/User/")images>
+          @Html.TextBoxFor(model =>model.username, new { @class = "contact_input" })
+      </div>
+      <div class="form_row">
+        <@Url.Content("~/Content/User/")images class="contact">
+          <strong>Password:</strong></@Url.Content("~/Content/User/")images>
+         @Html.PasswordFor(model => model.password, new { @class = "contact_input" })
+</div>
+
+      <div class="form_row">
+        <input type="submit" class="register" value="login">
+      </div>
+    }
+  </div>
 </div>
 <div class="clear"></div>
 
